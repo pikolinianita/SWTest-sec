@@ -33,4 +33,4 @@ jobs:
       run: mvn -B package --file pom.xml
     
     - name: SonarCloud Scan
-      run: mvn verify org.sonarsource.scanner.maven:sonar
+      run: mvn verify sonar:sonar
