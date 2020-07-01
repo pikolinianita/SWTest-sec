@@ -21,8 +21,14 @@ import pl.sobczak.swapp.httpconsume.SwRequest;
 @Service
 public class MyService {
 
-    @Autowired
+    
     SwHttpClientInt httpClient;
+
+    public MyService(SwHttpClientInt httpClient) {
+        this.httpClient = httpClient;
+    }
+    
+    
     
     public boolean putOrUpdate(String id, SwRequest input) {
         log.info("putOrUpdate invoked");

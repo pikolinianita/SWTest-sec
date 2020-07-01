@@ -41,7 +41,7 @@ public class HttpConsumerConfigurationTest {
         //var interceptors = restT.getInterceptors();
         //interceptors.add(new LoggingRequestInterceptor());
         restT.setInterceptors(Collections.singletonList(new LoggingRequestInterceptor()));
-        var result = restT.getForObject("", String.class,  "Leia");
+        var result = restT.getForObject("https://www.gazeta.pl", String.class);
         
         System.out.println(result);
     }

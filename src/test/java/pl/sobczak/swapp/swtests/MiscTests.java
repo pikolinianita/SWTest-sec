@@ -7,12 +7,14 @@ package pl.sobczak.swapp.swtests;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Disabled;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 
 /**
  *
  * @author piko
  */
+@Disabled
 public class MiscTests {
     
     

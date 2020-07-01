@@ -7,11 +7,14 @@ package pl.sobczak.swapp.httpconsume;
 
 import java.util.List;
 import java.util.concurrent.Future;
+import org.springframework.stereotype.Component;
+
 
 /**
  *
  * @author piko
  */
+@Component
 public class SwHttpClient implements SwHttpClientInt{
 
     @Override
