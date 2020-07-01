@@ -5,10 +5,14 @@
  */
 package pl.sobczak.swapp.httpconsume;
 
+import lombok.Data;
+
 /**
  *
  * @author piko
  */
-public class SomeKindOfResponse {
+@Data
+public class People {
     
+    String name;
 }

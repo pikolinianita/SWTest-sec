@@ -5,14 +5,16 @@
  */
 package pl.sobczak.swapp.httpconsume;
 
+import java.util.List;
+import java.util.concurrent.Future;
+
 /**
  *
  * @author piko
  */
 public interface SwHttpClientInt {
     
-    public SomeKindOfResponse getAllResponse(SwRequest req);{
+    public SomeKindOfResponse getAllResponse(SwRequest req);
     
-}
-    
+    public Future<List<People>> getPeopleList(String query);
 }

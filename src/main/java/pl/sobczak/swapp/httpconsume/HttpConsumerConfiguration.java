@@ -20,23 +20,17 @@ import org.springframework.web.util.DefaultUriBuilderFactory;
 @Configuration
 @CommonsLog
 public class HttpConsumerConfiguration {
-    
+
     // 
-    // format requested from db: "https://swapi.dev/api/people/?search=r2"
-    // use: restTemplate.getForObject("luke", SomeResult.class, "people")
+    
     @Bean
-    public RestTemplate getRestTemplate(){
+    public RestTemplate getRestTemplate() {
         log.info("Rest Template Bean Creation");
-        //var restTemplate = new RestTemplate();
-        var factory = new DefaultUriBuilderFactory("https://swapi.dev/api/people/?search={name}");
-        //factory.setEncodingMode(DefaultUriBuilderFactory.EncodingMode.NONE);
-        //"https://swapi.dev/api/people/?search={searchString}"
-        //restTemplate.setUriTemplateHandler(factory);
-        RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder();
-        restTemplateBuilder = restTemplateBuilder.uriTemplateHandler(factory);
-        var restTemplate = restTemplateBuilder.build();
+
+        var restTemplate = new RestTemplate();
+
         log.info("Rest Template Bean Created");
         return restTemplate;
     }
-    
+
 }
