@@ -36,3 +36,8 @@ jobs:
       run: mvn verify sonar:sonar
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Publish to GitHub Packages Apache Maven
+      run: mvn deploy
+      env:
+        GITHUB_TOKEN: ${{ github.token }}  
