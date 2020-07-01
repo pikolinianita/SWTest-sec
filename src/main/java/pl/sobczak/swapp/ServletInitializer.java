@@ -1,4 +1,4 @@
-package pl.sobczak.SWTest;
+package pl.sobczak.swapp;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
