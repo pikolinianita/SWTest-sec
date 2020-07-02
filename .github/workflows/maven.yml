@@ -1,11 +1,9 @@
 # This workflow will build a Java project with Maven
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-name: Java CI with Maven
+name: Pull Request
 
-on:
-  push:
-    branches: [ master ]
+on:  
   pull_request:
     branches: [ master ]
 
@@ -33,11 +31,8 @@ jobs:
       run: mvn -B package --file pom.xml
      
     - name: SonarCloud Scan
-      run: mvn verify sonar:sonar
+      run: mvn verify sonar:sonar -DskipTests
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
-    - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy
-      env:
-        GITHUB_TOKEN: ${{ github.token }}  
+   
