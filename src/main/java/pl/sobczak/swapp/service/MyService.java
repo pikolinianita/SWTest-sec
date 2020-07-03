@@ -5,8 +5,13 @@
  */
 package pl.sobczak.swapp.service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +32,7 @@ import pl.sobczak.swapp.httpconsume.data.Planet;
 public class MyService {
 
     
-    SwHttpClientInt httpClient;
+    private SwHttpClientInt httpClient;
 
     public MyService(SwHttpClientInt httpClient) {
         this.httpClient = httpClient;
@@ -43,9 +48,21 @@ public class MyService {
     }
 
     private void put(SwRequest input) {
-        log.info("put invoked");
-       // Future<List<Planet>> futureListPlanets = httpClient.<Planet>getListOf(PLANET, input.heroPlanet(), Planet.class);
-        //Future<List<People>> futureListPeoples = httpClient.<People>getListOf(PEOPLE, input.heroName(), People.class);
+        try {
+            log.info("put invoked");
+            var peopleListFuture = httpClient.getPeopleList(input.getHeroName());
+            var planetsListFuture = httpClient.getPlanetList(input.getHeroPlanet());
+            var peopleList = peopleListFuture.get();
+            var filmSet = peopleList.stream()
+                    .flatMap(people -> people.getFilmIds().stream())
+                    .distinct()
+                    .collect(Collectors.toCollection(HashSet::new));
+            var filmList = httpClient.getFilmList(filmSet).get();
+            var planetList = planetsListFuture.get();
+                        
+                    } catch (InterruptedException | ExecutionException ex) {
+            Logger.getLogger(MyService.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

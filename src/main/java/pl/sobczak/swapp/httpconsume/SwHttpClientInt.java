@@ -5,6 +5,8 @@
  */
 package pl.sobczak.swapp.httpconsume;
 
+import java.util.Collection;
+import java.util.HashSet;
 import pl.sobczak.swapp.httpconsume.data.People;
 import pl.sobczak.swapp.httpconsume.data.Film;
 import pl.sobczak.swapp.httpconsume.data.Planet;
@@ -28,4 +30,6 @@ public interface SwHttpClientInt {
     public Future<Film> getFilm(String id);
     
     public Future<Planet> getPlanet(String queryPlanet);
+
+   public Future<List<Film>> getFilmList(Collection<String> collection);
 }

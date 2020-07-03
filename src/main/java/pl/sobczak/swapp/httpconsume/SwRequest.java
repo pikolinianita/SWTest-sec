@@ -17,7 +17,7 @@ import lombok.experimental.Accessors;
  *
  * @author piko
  */
-@Accessors(fluent = true)
+
 @Getter()
 @Setter()
 @NoArgsConstructor

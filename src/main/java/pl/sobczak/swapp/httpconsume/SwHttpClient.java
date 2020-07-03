@@ -11,11 +11,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -60,7 +63,7 @@ public class SwHttpClient implements SwHttpClientInt {
         } 
         while (nextUrl != null);
         
-        return new AsyncResult(resultList);
+        return new AsyncResult<>(resultList);
 
     }
 
@@ -80,7 +83,7 @@ public class SwHttpClient implements SwHttpClientInt {
         } 
         while (nextUrl != null);
         
-        return new AsyncResult(resultList);
+        return new AsyncResult<>(resultList);
     }
 
     @Async
@@ -113,7 +116,8 @@ public class SwHttpClient implements SwHttpClientInt {
             resultList.addAll(resultContainer.getResultList());
         } while (nextUrl != null);
         //Translate String -> T
-        return new AsyncResult(resultList);
+        //return new AsyncResult<List<T>>( resultList);
+        return null;
     }
 
     private ResultContainer getFullContainer(String nextUrl) {
@@ -132,8 +136,19 @@ public class SwHttpClient implements SwHttpClientInt {
         log.info("Get Film with id: " + id);
         var film = restTemplate.getForObject(SwapiUrls.FILMS.getUri() + id + '/', Film.class);
         log.info("Got Film with id" + id);
-        return new AsyncResult(film);
-
+        return new AsyncResult<>(film);
     }
 
+    @Async
+    @Override
+    public Future<List<Film>> getFilmList(Collection<String> collection){
+        var resultList = 
+        collection.stream()
+                .map(id -> restTemplate.getForObject(SwapiUrls.FILMS.getUri() + id + '/', Film.class))
+                .collect(Collectors.toList());
+        return new AsyncResult<List<Film>>(resultList);
+    }
+
+    
+    
 }
