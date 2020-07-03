@@ -10,7 +10,7 @@
     </parent>
     <groupId>pl.sobczak</groupId>
     <artifactId>SWTest</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>SWTest</name>
     <description>Test for SP</description>
@@ -91,6 +91,7 @@
                     </execution>
                 </executions>
             </plugin>
+            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>

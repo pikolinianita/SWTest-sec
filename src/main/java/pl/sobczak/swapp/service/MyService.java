@@ -5,11 +5,19 @@
  */
 package pl.sobczak.swapp.service;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import lombok.extern.apachecommons.CommonsLog;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.sobczak.swapp.httpconsume.SwHttpClientInt;
 import pl.sobczak.swapp.httpconsume.SwRequest;
+import pl.sobczak.swapp.httpconsume.data.Film;
+import pl.sobczak.swapp.httpconsume.data.People;
+import pl.sobczak.swapp.httpconsume.data.Planet;
 
 /**
  *
@@ -21,15 +29,12 @@ import pl.sobczak.swapp.httpconsume.SwRequest;
 @Service
 public class MyService {
 
-    
-    SwHttpClientInt httpClient;
+    private final SwHttpClientInt httpClient;
 
     public MyService(SwHttpClientInt httpClient) {
         this.httpClient = httpClient;
     }
-    
-    
-    
+
     public boolean putOrUpdate(String id, SwRequest input) {
         log.info("putOrUpdate invoked");
         //if (idExist(id)) update else
@@ -38,7 +43,39 @@ public class MyService {
     }
 
     private void put(SwRequest input) {
+        try {
+            log.info("put invoked");
+            var peopleListFuture = httpClient.getPeopleList(input.getHeroName());
+            var planetsListFuture = httpClient.getPlanetList(input.getHeroPlanet());
+            var peopleList = peopleListFuture.get();
+            var filmSet = peopleList.stream()
+                    .flatMap(people -> people.getFilmIds().stream())
+                    .distinct()
+                    .collect(Collectors.toCollection(HashSet::new));
+            var filmList = httpClient.getFilmList(filmSet).get();
+            var planetList = planetsListFuture.get();
+            verifyLists(peopleList, planetList, filmList);
+            sendResultsToDataBase(input, peopleList, planetList, filmList);
+
+        } catch (InterruptedException | ExecutionException ex) {
+            Logger.getLogger(MyService.class.getName()).log(Level.SEVERE, null, ex);
+            //TODO internal server Error?
+            Thread.currentThread().interrupt();
+            throw new RuntimeException(ex);
+            
+        }
+    }
+
+    private boolean verifyLists(List<People> peopleList, List<Planet> planetList, List<Film> filmList) {
+        return peopleList.size()>0 && planetList.size() == 1 && filmList.size() > 0;
         
     }
-    
+
+    private void sendResultsToDataBase(SwRequest input, List<People> peopleList, List<Planet> planetList, List<Film> filmList) {
+        System.out.println(input);
+        System.out.println(peopleList);
+        System.out.println(planetList);
+        System.out.println(filmList);
+    }
+
 }

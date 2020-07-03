@@ -10,13 +10,24 @@ package pl.sobczak.swapp.httpconsume;
  * @author piko
  */
 public enum SwapiUrls {
-    
-    PEOPLE ("https://swapi.dev/api/people/?search={}"),
-    PLANET ("https://swapi.dev/api/planets/?search={}"),
-    FILMS ("https://swapi.dev/api/films/?search={}");
-    
-    private SwapiUrls(String str){
-        UrlAddress = str;
+
+    PEOPLE("https://swapi.dev/api/people/"),
+    PLANET("https://swapi.dev/api/planets/"),
+    FILMS("https://swapi.dev/api/films/");
+
+    private final String urlAddress;
+
+    private SwapiUrls(String str) {
+        urlAddress = str;
     }
-    private final String UrlAddress;
+
+    public String getSearchUri() {
+
+        return urlAddress + "?search=";
+    }
+
+    public String getUri() {
+        return urlAddress;
+    }
+
 }
