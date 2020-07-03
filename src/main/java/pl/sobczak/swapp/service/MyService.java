@@ -5,11 +5,16 @@
  */
 package pl.sobczak.swapp.service;
 
+import java.util.List;
+import java.util.concurrent.Future;
 import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.sobczak.swapp.httpconsume.SwHttpClientInt;
 import pl.sobczak.swapp.httpconsume.SwRequest;
+import static pl.sobczak.swapp.httpconsume.SwapiUrls.*;
+import pl.sobczak.swapp.httpconsume.data.People;
+import pl.sobczak.swapp.httpconsume.data.Planet;
 
 /**
  *
@@ -38,7 +43,9 @@ public class MyService {
     }
 
     private void put(SwRequest input) {
-        
+        log.info("put invoked");
+       // Future<List<Planet>> futureListPlanets = httpClient.<Planet>getListOf(PLANET, input.heroPlanet(), Planet.class);
+        //Future<List<People>> futureListPeoples = httpClient.<People>getListOf(PEOPLE, input.heroName(), People.class);
     }
     
 }
