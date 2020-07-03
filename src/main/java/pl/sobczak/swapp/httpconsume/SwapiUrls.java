@@ -15,6 +15,8 @@ public enum SwapiUrls {
     PLANET("https://swapi.dev/api/planets/"),
     FILMS("https://swapi.dev/api/films/");
 
+    private final String urlAddress;
+
     private SwapiUrls(String str) {
         urlAddress = str;
     }
@@ -28,5 +30,4 @@ public enum SwapiUrls {
         return urlAddress;
     }
 
-    private final String urlAddress;
 }
