@@ -27,7 +27,7 @@ import pl.sobczak.swapp.httpconsume.data.Film;
 @CommonsLog
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {HttpConsumerConfiguration.class, SwHttpClient.class})
-public class SwHttpClientTest {
+class SwHttpClientTest {
 
     @Autowired
     private SwHttpClient client;

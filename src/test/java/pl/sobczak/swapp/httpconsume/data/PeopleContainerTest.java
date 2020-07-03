@@ -21,7 +21,7 @@ import pl.sobczak.swapp.httpconsume.SwapiUrls;
  */
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = HttpConsumerConfiguration.class)
-public class PeopleContainerTest {
+class PeopleContainerTest {
 
     @Autowired
     private RestTemplate template;
