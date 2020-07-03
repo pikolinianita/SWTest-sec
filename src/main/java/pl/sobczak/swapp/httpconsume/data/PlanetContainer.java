@@ -34,7 +34,7 @@ public class PlanetContainer {
     }
 
     @JsonProperty("results")
-    public void setTheRes(ArrayList<Map<String, Object>> result) {
+    public void setTheRes(List<Map<String, Object>> result) {
 
         resultList.addAll(
                 result.stream()

@@ -36,7 +36,7 @@ public class PeopleContainer {
     }
 
     @JsonProperty("results")
-    public void setTheRes(ArrayList<Map<String, Object>> result) {
+    public void setTheRes(List<Map<String, Object>> result) {
 
         resultList.addAll(
                 result.stream()
@@ -55,7 +55,6 @@ public class PeopleContainer {
 
     private Set<String> makeSet(Object value) {
         List<String> filmsList = (List) value;
-        System.out.println("make set with" + value.getClass().getName());
         return filmsList.stream()
                 .map(this::getId)
                 .collect(Collectors.toCollection(HashSet::new));

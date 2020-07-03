@@ -24,7 +24,7 @@ import pl.sobczak.swapp.httpconsume.SwapiUrls;
 public class PlanetContainerTest {
 
     @Autowired
-    RestTemplate template;
+   private RestTemplate template;
 
     @Test    
     void deSerialisationTest() {

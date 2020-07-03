@@ -60,7 +60,7 @@ public class SwHttpClient implements SwHttpClientInt {
         //ToDo dereferencing null pointer - exception?
         var resultList = new LinkedList<Planet>();
         var nextUrl = SwapiUrls.PLANET.getSearchUri() + query;
-        //nextUrl = "https://swapi.dev/api/planets/?search=t&page=2";
+       
         do {
             log.info("------url: " + nextUrl + " :---:");
             var planetContainer = restTemplate.getForObject(nextUrl, PlanetContainer.class);
@@ -81,8 +81,7 @@ public class SwHttpClient implements SwHttpClientInt {
             var objectMapper = new ObjectMapper();
             JsonNode root = objectMapper.readTree(response.getBody());
             log.info(root);
-            //Planet resultPlanet = restTemplate.getForObject(SwapiUrls.PLANET.toString(), Planet.class, queryPlanet);
-
+            
         } catch (JsonProcessingException ex) {
             log.error(ex);
         }
@@ -105,7 +104,7 @@ public class SwHttpClient implements SwHttpClientInt {
                 = collection.stream()
                         .map(id -> restTemplate.getForObject(SwapiUrls.FILMS.getUri() + id + '/', Film.class))
                         .collect(Collectors.toList());
-        return new AsyncResult<List<Film>>(resultList);
+        return new AsyncResult<>(resultList);
     }
 
 }

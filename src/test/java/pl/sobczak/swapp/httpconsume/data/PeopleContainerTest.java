@@ -24,13 +24,13 @@ import pl.sobczak.swapp.httpconsume.SwapiUrls;
 public class PeopleContainerTest {
 
     @Autowired
-    RestTemplate template;
+    private RestTemplate template;
 
     /**
      * Test of setTheRes method, of class PeopleContainer.
      */
     @Test
-    public void deSerialisationTest() {
+     void deSerialisationTest() {
         SoftAssertions softly = new SoftAssertions();
         
         // given

@@ -13,13 +13,11 @@ import java.util.stream.Collectors;
 import lombok.extern.apachecommons.CommonsLog;
 import static org.assertj.core.api.Assertions.*;
 import org.assertj.core.api.SoftAssertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.web.client.RestTemplate;
 import pl.sobczak.swapp.httpconsume.data.Film;
 
 /**
@@ -32,10 +30,10 @@ import pl.sobczak.swapp.httpconsume.data.Film;
 public class SwHttpClientTest {
 
     @Autowired
-    SwHttpClient client;
+    private SwHttpClient client;
 
     @Test
-    public void GetOneFilmTest() throws ExecutionException, InterruptedException {
+    void getOneFilmTest() throws ExecutionException, InterruptedException {
 
         // given autowired
         // when
@@ -48,7 +46,7 @@ public class SwHttpClientTest {
     }
 
     @Test
-    public void GetManyFilmsTest() {
+    void getManyFilmsTest() {
 
         // given - sorted by creation time
         List<String> episodes = List.of("1", "2", "3", "4", "5");
@@ -78,7 +76,7 @@ public class SwHttpClientTest {
     }
 
     @Test
-    public void getPlanetListTest() throws InterruptedException, ExecutionException {
+    void getPlanetListTest() throws InterruptedException, ExecutionException {
 
         // given
         String query = "t";
@@ -92,7 +90,7 @@ public class SwHttpClientTest {
     }
 
     @Test
-    public void getOnePlanetListTest() throws InterruptedException, ExecutionException {
+    void getOnePlanetListTest() throws InterruptedException, ExecutionException {
         SoftAssertions softly = new SoftAssertions();
 
         // given
@@ -110,7 +108,7 @@ public class SwHttpClientTest {
     }
 
     @Test
-    public void getPeopleListTest() throws InterruptedException, ExecutionException {
+    void getPeopleListTest() throws InterruptedException, ExecutionException {
 
         // given
         String query = "t";
@@ -124,7 +122,7 @@ public class SwHttpClientTest {
     }
 
     @Test
-    public void getOnePeopleListTest() throws InterruptedException, ExecutionException {
+    void getOnePeopleListTest() throws InterruptedException, ExecutionException {
         SoftAssertions softly = new SoftAssertions();
 
         // given
@@ -142,7 +140,7 @@ public class SwHttpClientTest {
     }
 
     @Test
-    public void noPeopleTest() throws InterruptedException, ExecutionException {
+    void noPeopleTest() throws InterruptedException, ExecutionException {
         // given
         String query = "zzzzzzzz";
 
@@ -150,7 +148,7 @@ public class SwHttpClientTest {
         var peopleList = client.getPeopleList(query).get();
 
         // then
-        assertThat(peopleList).as("List of T").hasSize(0);
+        assertThat(peopleList).as("List of T").isEmpty();
     }
 
 }
