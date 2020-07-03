@@ -20,9 +20,9 @@ import lombok.Data;
 @Data
 public class PlanetContainer {
 
-    String next;
+    private String next;
 
-    String count;
+    private String count;
 
     List<Planet> resultList = new LinkedList<>();
 

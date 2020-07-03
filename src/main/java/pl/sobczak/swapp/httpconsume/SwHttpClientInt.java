@@ -17,9 +17,7 @@ import java.util.concurrent.Future;
  * @author piko
  */
 public interface SwHttpClientInt {
-
-    public <T> Future<List<T>> getListOf(SwapiUrls link, String query);
-
+    
     public Future<List<People>> getPeopleList(String query);
 
     public Future<List<Planet>> getPlanetList(String query);

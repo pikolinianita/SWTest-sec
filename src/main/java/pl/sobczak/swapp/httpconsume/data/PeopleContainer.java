@@ -22,9 +22,9 @@ import lombok.Data;
 @Data
 public class PeopleContainer {
 
-    String next;
+    private String next;
 
-    String count;
+    private String count;
 
     List<People> resultList = new LinkedList<>();
 

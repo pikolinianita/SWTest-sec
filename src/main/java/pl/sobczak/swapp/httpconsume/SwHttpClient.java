@@ -24,7 +24,6 @@ import org.springframework.web.client.RestTemplate;
 import pl.sobczak.swapp.httpconsume.data.Film;
 import pl.sobczak.swapp.httpconsume.data.PeopleContainer;
 import pl.sobczak.swapp.httpconsume.data.PlanetContainer;
-import pl.sobczak.swapp.httpconsume.data.ResultContainer;
 
 /**
  *
@@ -89,34 +88,7 @@ public class SwHttpClient implements SwHttpClientInt {
         }
         return new AsyncResult<>(new Planet());
     }
-
-    @Async
-    @Override
-    public <T> Future<List<T>> getListOf(SwapiUrls link, String query) {
-        var resultList = new LinkedList<String>();
-        log.info(String.format("getListOf invoked with %s for %s ", query, link.toString()));
-        var nextUrl = link.getSearchUri() + query;
-        do {
-            log.info("look For " + nextUrl);
-            ResultContainer resultContainer = getFullContainer(nextUrl);
-            nextUrl = resultContainer.getNext();
-            resultList.addAll(resultContainer.getResultList());
-        } while (nextUrl != null);
-        //Translate String -> T
-        //return new AsyncResult<List<T>>( resultList);
-        return null;
-    }
-
-    private ResultContainer getFullContainer(String nextUrl) {
-        log.info("entered getFullContainer");
-
-        ResultContainer resultContainer;
-        resultContainer = restTemplate.getForObject(nextUrl, ResultContainer.class);
-//         
-        log.info("Return from getFullContainer with " + resultContainer);
-        return resultContainer;
-    }
-
+    
     @Async
     @Override
     public Future<Film> getFilm(String id) {
