@@ -5,7 +5,6 @@
  */
 package pl.sobczak.swapp.httpconsume.data;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,6 +20,6 @@ public class People {
     private String name;
 
     private String swapiId;
-    
+
     private Set<String> filmIds;
 }

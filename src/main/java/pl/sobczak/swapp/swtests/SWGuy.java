@@ -10,5 +10,5 @@ package pl.sobczak.swapp.swtests;
  * @author piko
  */
 public class SWGuy {
-    
+
 }

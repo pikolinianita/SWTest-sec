@@ -19,38 +19,38 @@ import lombok.Data;
  */
 @Data
 public class PlanetContainer {
-    
+
     String next;
-    
+
     String count;
 
     List<Planet> resultList = new LinkedList<>();
-    
+
     @JsonProperty("next")
-    public void withHttpsFix(String str){
-        if(str!=null){
+    public void withHttpsFix(String str) {
+        if (str != null) {
             next = str.replace("http://", "https://");
         }
     }
 
     @JsonProperty("results")
-    public void setTheRes(ArrayList<Map<String,Object>> result) {
-        
+    public void setTheRes(ArrayList<Map<String, Object>> result) {
+
         resultList.addAll(
                 result.stream()
-                .map(record -> 
-                    new Planet((String) record.get("name"), 
-                          getId((String)record.get("url")))
-                )
-                .collect(Collectors.toCollection(LinkedList::new)));
+                        .map(record
+                                -> new Planet((String) record.get("name"),
+                                getId((String) record.get("url")))
+                        )
+                        .collect(Collectors.toCollection(LinkedList::new)));
     }
 
     // method takes last part of URL:
     // "http://swapi/something/20/" -> "20"
     //
     private String getId(String url) {
-        var tmp = url.substring(0, url.length()-1);
-        return tmp.substring(tmp.lastIndexOf('/')+1);
+        var tmp = url.substring(0, url.length() - 1);
+        return tmp.substring(tmp.lastIndexOf('/') + 1);
     }
-    
+
 }

@@ -6,7 +6,6 @@
 package pl.sobczak.swapp.httpconsume;
 
 import java.util.Collection;
-import java.util.HashSet;
 import pl.sobczak.swapp.httpconsume.data.People;
 import pl.sobczak.swapp.httpconsume.data.Film;
 import pl.sobczak.swapp.httpconsume.data.Planet;
@@ -19,17 +18,15 @@ import java.util.concurrent.Future;
  */
 public interface SwHttpClientInt {
 
-    public <T> Future<List<T>> getListOf(SwapiUrls link, String query);    
-  
-    public SomeKindOfResponse getAllResponse(SwRequest req);
-    
+    public <T> Future<List<T>> getListOf(SwapiUrls link, String query);
+
     public Future<List<People>> getPeopleList(String query);
-    
+
     public Future<List<Planet>> getPlanetList(String query);
-    
+
     public Future<Film> getFilm(String id);
-    
+
     public Future<Planet> getPlanet(String queryPlanet);
 
-   public Future<List<Film>> getFilmList(Collection<String> collection);
+    public Future<List<Film>> getFilmList(Collection<String> collection);
 }

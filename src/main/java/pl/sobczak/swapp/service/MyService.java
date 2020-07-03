@@ -6,20 +6,14 @@
 package pl.sobczak.swapp.service;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import lombok.extern.apachecommons.CommonsLog;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.sobczak.swapp.httpconsume.SwHttpClientInt;
 import pl.sobczak.swapp.httpconsume.SwRequest;
-import static pl.sobczak.swapp.httpconsume.SwapiUrls.*;
-import pl.sobczak.swapp.httpconsume.data.People;
-import pl.sobczak.swapp.httpconsume.data.Planet;
 
 /**
  *
@@ -31,15 +25,12 @@ import pl.sobczak.swapp.httpconsume.data.Planet;
 @Service
 public class MyService {
 
-    
     private SwHttpClientInt httpClient;
 
     public MyService(SwHttpClientInt httpClient) {
         this.httpClient = httpClient;
     }
-    
-    
-    
+
     public boolean putOrUpdate(String id, SwRequest input) {
         log.info("putOrUpdate invoked");
         //if (idExist(id)) update else
@@ -59,10 +50,13 @@ public class MyService {
                     .collect(Collectors.toCollection(HashSet::new));
             var filmList = httpClient.getFilmList(filmSet).get();
             var planetList = planetsListFuture.get();
-                        
-                    } catch (InterruptedException | ExecutionException ex) {
+
+        } catch (InterruptedException | ExecutionException ex) {
             Logger.getLogger(MyService.class.getName()).log(Level.SEVERE, null, ex);
+            //TODO internal server Error?
+            throw new RuntimeException(ex);
+
         }
     }
-    
+
 }

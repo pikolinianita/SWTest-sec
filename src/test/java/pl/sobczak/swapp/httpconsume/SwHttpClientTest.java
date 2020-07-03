@@ -6,9 +6,7 @@
 package pl.sobczak.swapp.httpconsume;
 
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
@@ -23,10 +21,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.RestTemplate;
 import pl.sobczak.swapp.httpconsume.data.Film;
-import pl.sobczak.swapp.httpconsume.data.Planet;
-import pl.sobczak.swapp.httpconsume.data.ResultContainer;
-import pl.sobczak.swapp.httpconsume.data.TestContainer;
-import pl.sobczak.swapp.httpconsume.data.PlanetContainer;
 
 /**
  *
@@ -40,42 +34,10 @@ public class SwHttpClientTest {
     @Autowired
     SwHttpClient client;
 
-   
-    /**
-     * Test of getPeopleList method, of class SwHttpClient.
-     * @throws java.lang.InterruptedException
-     * @throws java.util.concurrent.ExecutionException
-     */
-    @Disabled
-    @Test
-    public void testGetOnePlanetList() throws InterruptedException, ExecutionException {
-        var template = new RestTemplate();
-        var client = new SwHttpClient(template);
-        System.out.println("aaa");
-        var result = client.<String>getListOf(SwapiUrls.PLANET, "Tatooine");
-        System.out.println("bbb");
-        var list = result.get();
-        System.out.println(list);
-
-    }
-
-    @Disabled
-    @Test
-    public void testGetManyPlanetsList() throws InterruptedException, ExecutionException {
-        var template = new RestTemplate();
-        var client = new SwHttpClient(template);
-        System.out.println("aaa");
-        var result = client.getListOf(SwapiUrls.PLANET, "T");
-        System.out.println("bbb");
-        var list = result.get();
-        System.out.println(list);
-
-    }
-
     @Test
     public void GetOneFilmTest() throws ExecutionException, InterruptedException {
 
-        // given
+        // given autowired
         // when
         var film = client.getFilm("1").get();
 
@@ -117,91 +79,78 @@ public class SwHttpClientTest {
 
     @Test
     public void getPlanetListTest() throws InterruptedException, ExecutionException {
-                
+
         // given
         String query = "t";
-        
+
         // when
         var planetList = client.getPlanetList(query).get();
-        
+
         // then
         assertThat(planetList).as("List of T").hasSize(24).extracting("name").doesNotContainNull();
-                
-        }
-    
+
+    }
+
     @Test
     public void getOnePlanetListTest() throws InterruptedException, ExecutionException {
         SoftAssertions softly = new SoftAssertions();
-        
+
         // given
         String query = "Tatooine";
-        
+
         // when
         var planetList = client.getPlanetList(query).get();
-        
+
         // then
         softly.assertThat(planetList).as("List of Tatooine").hasSize(1);
         softly.assertThat(planetList.get(0)).as("Tatooine")
-                .extracting("name", "swapiId").containsExactly("Tatooine", "1" );
-        
+                .extracting("name", "swapiId").containsExactly("Tatooine", "1");
+
         softly.assertAll();
     }
-    
+
     @Test
     public void getPeopleListTest() throws InterruptedException, ExecutionException {
-                
+
         // given
         String query = "t";
-        
+
         // when
         var peopleList = client.getPeopleList(query).get();
-        
+
         // then
         assertThat(peopleList).as("List of T").hasSize(34).extracting("name").doesNotContainNull();
-                
-        }
-    
+
+    }
+
     @Test
     public void getOnePeopleListTest() throws InterruptedException, ExecutionException {
         SoftAssertions softly = new SoftAssertions();
-        
+
         // given
         String query = "Luke Skywalker";
-        
+
         // when
         var peopleList = client.getPeopleList(query).get();
-        
+
         // then
         softly.assertThat(peopleList).as("List of Luke").hasSize(1);
         softly.assertThat(peopleList.get(0)).as("Luke")
-                .extracting("name", "swapiId").containsExactly("Luke Skywalker", "1" );
-        
+                .extracting("name", "swapiId").containsExactly("Luke Skywalker", "1");
+
         softly.assertAll();
     }
-    
+
     @Test
     public void noPeopleTest() throws InterruptedException, ExecutionException {
         // given
         String query = "zzzzzzzz";
-        
+
         // when
         var peopleList = client.getPeopleList(query).get();
-        
+
         // then
         assertThat(peopleList).as("List of T").hasSize(0);
     }
-    
-//    /**
-//     * Test of getPlanet method, of class SwHttpClient.
-//     */
-//    @Test
-//    public void testGetPlanet() throws InterruptedException, ExecutionException {
-//        var template = new RestTemplate();
-//        var client = new SwHttpClient(template);
-//        var result = client.getPlanet("Tatooine").get();
-//
-//        System.out.println(result);
-//        assertEquals("Tatooine", result.getName());
-//
-//    }
+
 }

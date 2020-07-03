@@ -14,14 +14,14 @@ import lombok.Data;
  */
 @Data
 public class Actor {
-   String name;
-   String gender;
-   LinkedList<String> films;
+
+    String name;
+    String gender;
+    LinkedList<String> films;
 
     @Override
     public String toString() {
         return "Actor{" + "name=" + name + ",\n gender=" + gender + ",\n films=" + films + "}\n";
     }
-   
-   
+
 }

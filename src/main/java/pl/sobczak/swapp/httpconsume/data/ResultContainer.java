@@ -6,8 +6,6 @@
 package pl.sobczak.swapp.httpconsume.data;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Collection;
 import java.util.List;
 import lombok.Data;
 
@@ -16,15 +14,14 @@ import lombok.Data;
  * @author piko
  */
 @Data
-public class ResultContainer<T>{
-    
-    
+public class ResultContainer<T> {
+
     String next;
     String count;
-    
+
     @JsonProperty("results")
     List<Object> resultList;
-    
+
 //    public String next() {
 //        return next();
 //    }
@@ -32,6 +29,4 @@ public class ResultContainer<T>{
 //    public List<T> getList() {
 //        return resultList;
 //    }
-    
-    
 }

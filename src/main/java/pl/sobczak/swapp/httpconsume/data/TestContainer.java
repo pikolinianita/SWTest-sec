@@ -16,7 +16,7 @@ import lombok.Data;
 @Data
 public class TestContainer {
 
-    Object wtf ;
+    Object wtf;
     String next;
     String count;
 
@@ -26,17 +26,17 @@ public class TestContainer {
     public void setTheRes(Object name) {
         this.wtf = name;
     }
-    
-    public Object getWTF(){
+
+    public Object getWTF() {
         return wtf;
     }
-    
-    public String getData(){
-        return wtf.getClass().toString() + " ---- " + System.lineSeparator() + wtf.toString() ;
+
+    public String getData() {
+        return wtf.getClass().toString() + " ---- " + System.lineSeparator() + wtf.toString();
     }
-    
-    public String getData0(){
-        var wtf0 = ((List)wtf).get(0);
-        return wtf0.getClass().toString() + " ---- " + System.lineSeparator() + wtf0.toString() ;
+
+    public String getData0() {
+        var wtf0 = ((List) wtf).get(0);
+        return wtf0.getClass().toString() + " ---- " + System.lineSeparator() + wtf0.toString();
     }
 }

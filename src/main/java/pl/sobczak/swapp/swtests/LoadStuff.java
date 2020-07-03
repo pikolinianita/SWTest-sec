@@ -15,21 +15,21 @@ import org.springframework.web.client.RestTemplate;
  */
 @Component
 public class LoadStuff {
-    
-    public String loadGuys(String search){
-     
+
+    public String loadGuys(String search) {
+
         String PeopleURI = "https://swapi.dev/api/people";
         var template = new RestTemplate();
         ResponseEntity<String> response = template.getForEntity(PeopleURI + "/1/", String.class);
         return response.getBody();
     }
-    
-    public String loadActor(String search){
-        
+
+    public String loadActor(String search) {
+
         String PeopleURI = "https://swapi.dev/api/people";
         var template = new RestTemplate();
         ResponseEntity<Actor> response = template.getForEntity(PeopleURI + "/1/", Actor.class);
         return response.getBody().toString();
     }
-    
+
 }

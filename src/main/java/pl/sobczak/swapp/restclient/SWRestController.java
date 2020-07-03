@@ -30,7 +30,7 @@ import pl.sobczak.swapp.service.MyService;
 @RestController
 @RequestMapping("/report")
 public class SWRestController {
-    
+
     @Autowired
     MyService service;
 
@@ -48,7 +48,7 @@ public class SWRestController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> put(@PathVariable String id, @RequestBody SwRequest input) {
-        log.info(String.format("Put invoked with id %s and request body %s",id,input));
+        log.info(String.format("Put invoked with id %s and request body %s", id, input));
         service.putOrUpdate(id, input);
         return null;
     }

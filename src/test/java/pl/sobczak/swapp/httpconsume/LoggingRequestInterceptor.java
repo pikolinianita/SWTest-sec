@@ -5,9 +5,7 @@
  */
 package pl.sobczak.swapp.httpconsume;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;

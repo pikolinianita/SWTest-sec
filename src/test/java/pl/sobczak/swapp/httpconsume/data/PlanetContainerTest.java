@@ -5,8 +5,6 @@
  */
 package pl.sobczak.swapp.httpconsume.data;
 
-import java.util.List;
-import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,7 +13,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.RestTemplate;
 import pl.sobczak.swapp.httpconsume.HttpConsumerConfiguration;
-import pl.sobczak.swapp.httpconsume.LoggingRequestInterceptor;
 import pl.sobczak.swapp.httpconsume.SwapiUrls;
 
 /**
