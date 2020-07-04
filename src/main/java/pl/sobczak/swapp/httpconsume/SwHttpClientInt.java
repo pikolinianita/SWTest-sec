@@ -24,7 +24,5 @@ public interface SwHttpClientInt {
 
     public Future<Film> getFilm(String id);
 
-    public Future<Planet> getPlanet(String queryPlanet);
-
     public Future<List<Film>> getFilmList(Collection<String> collection);
 }

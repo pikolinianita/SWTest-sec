@@ -71,23 +71,7 @@ public class SwHttpClient implements SwHttpClientInt {
 
         return new AsyncResult<>(resultList);
     }
-
-    @Async
-    @Override
-    public Future<Planet> getPlanet(String queryPlanet) {
-        try {
-            log.info(SwapiUrls.PLANET.getSearchUri() + queryPlanet);
-            ResponseEntity<String> response = restTemplate.getForEntity(SwapiUrls.PLANET.getSearchUri() + queryPlanet, String.class);
-            var objectMapper = new ObjectMapper();
-            JsonNode root = objectMapper.readTree(response.getBody());
-            log.info(root);
-            
-        } catch (JsonProcessingException ex) {
-            log.error(ex);
-        }
-        return new AsyncResult<>(new Planet());
-    }
-    
+        
     @Async
     @Override
     public Future<Film> getFilm(String id) {
@@ -107,4 +91,5 @@ public class SwHttpClient implements SwHttpClientInt {
         return new AsyncResult<>(resultList);
     }
 
+   
 }
