@@ -18,6 +18,7 @@ import pl.sobczak.swapp.httpconsume.SwRequest;
 import pl.sobczak.swapp.httpconsume.data.Film;
 import pl.sobczak.swapp.httpconsume.data.People;
 import pl.sobczak.swapp.httpconsume.data.Planet;
+import pl.sobczak.swapp.Exceptions.RestExceptions;
 
 /**
  *
@@ -58,17 +59,16 @@ public class MyService {
             sendResultsToDataBase(input, peopleList, planetList, filmList);
 
         } catch (InterruptedException | ExecutionException ex) {
-            Logger.getLogger(MyService.class.getName()).log(Level.SEVERE, null, ex);
-            //TODO internal server Error?
+            log.error("Service Connection Error", ex);
             Thread.currentThread().interrupt();
-            throw new RuntimeException(ex);
-            
+            throw new RestExceptions.HttpClientNoConnectionException("Problem With Connection to Swapi", ex);
+
         }
     }
 
     private boolean verifyLists(List<People> peopleList, List<Planet> planetList, List<Film> filmList) {
-        return peopleList.size()>0 && planetList.size() == 1 && filmList.size() > 0;
-        
+        return peopleList.size() > 0 && planetList.size() == 1 && filmList.size() > 0;
+
     }
 
     private void sendResultsToDataBase(SwRequest input, List<People> peopleList, List<Planet> planetList, List<Film> filmList) {

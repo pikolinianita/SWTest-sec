@@ -77,7 +77,7 @@ class SwHttpClientTest {
     }
 
     @Test
-    public void filmListTest() throws InterruptedException, ExecutionException {
+    void filmListTest() throws InterruptedException, ExecutionException {
         
         // given
         Set<String> episodes = Set.of("1", "2", "3", "4", "5");

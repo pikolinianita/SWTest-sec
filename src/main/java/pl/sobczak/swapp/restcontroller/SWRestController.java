@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.sobczak.swapp.restclient;
+package pl.sobczak.swapp.restcontroller;
 
 import java.util.List;
 import lombok.extern.apachecommons.CommonsLog;
@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestClientException;
+import pl.sobczak.swapp.Exceptions.RestExceptions;
 import pl.sobczak.swapp.httpconsume.SwRequest;
 import pl.sobczak.swapp.service.MyService;
 
@@ -40,6 +42,12 @@ public class SWRestController {
         return null;
     }
 
+    @GetMapping("/akeita")
+    public List<Object> getAkeita() {
+        log.info(" invoked");
+        throw new RestExceptions.AkeitaException("Water is the mother of tea, a teapot its father, and fire the teacher");
+    }
+    
     @GetMapping("/{id}")
     public Object get(@PathVariable String id) {
         log.info("Get invoked");

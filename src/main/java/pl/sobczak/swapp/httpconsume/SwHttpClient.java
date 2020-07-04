@@ -7,16 +7,12 @@ package pl.sobczak.swapp.httpconsume;
 
 import pl.sobczak.swapp.httpconsume.data.People;
 import pl.sobczak.swapp.httpconsume.data.Planet;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 import lombok.extern.apachecommons.CommonsLog;
-import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Component;
