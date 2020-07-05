@@ -5,7 +5,6 @@
  */
 package pl.sobczak.swapp.helper;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,9 +19,9 @@ import pl.sobczak.swapp.httpconsume.data.Planet;
  */
 public class TestObjectMaker {
 
-   static HashMap<String, Planet> planets;
-   static HashMap<String, People> people;
-   static HashMap<String, Film> films;
+    static HashMap<String, Planet> planets;
+    static HashMap<String, People> people;
+    static HashMap<String, Film> films;
 
     public TestObjectMaker() {
 
@@ -42,28 +41,34 @@ public class TestObjectMaker {
         films.put("DS9", new Film().setName("DS9").setSwapiId("3"));
     }
 
-    public static Planet planet(String name){
+    public static Planet planet(String name) {
         return planets.get(name);
     }
-    
-    public static People people(String name){
+
+    public static People people(String name) {
         return people.get(name);
     }
-    
-    public static Film film (String name){
+
+    public static Film film(String name) {
         return films.get(name);
     }
-    
-    public static List<Planet> planets(){
+
+    public static List<Planet> planets() {
         return new LinkedList(planets.values());
     }
-    
-     public static List<People> peoples(){
-         return new LinkedList(people.values());
-     }
-     
-      public static List<Film> films(){
-          return new LinkedList(films.values());
-      }
-}
 
+    public static List<People> peoples() {
+        return new LinkedList(people.values());
+    }
+
+    public static List<Film> films() {
+        return new LinkedList(films.values());
+    }
+
+    public static Film filmWithId(String id) {
+        return films.values().stream()
+                .filter(film -> film.getSwapiId().equals(id))
+                .findFirst()
+                .get();
+    }
+}

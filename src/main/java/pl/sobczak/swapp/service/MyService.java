@@ -46,31 +46,40 @@ public class MyService {
         return false;
     }
 
-    private void put(SwRequest input) {
+    private QueryResult put(SwRequest input) {
         log.info("Service - put invoked");
         try {
             var peopleListFuture = httpClient.getPeopleList(input.getHeroName());
+            log.debug("got PeopleFut");
             var planetsListFuture = httpClient.getPlanetList(input.getHeroPlanet());
+            log.debug("got PlanFut");
             var peopleList = peopleListFuture.get(10, SECONDS);
+            log.debug("got PeopleList");
             var filmIdsSet = peopleList.stream()
                     .flatMap(people -> people.getFilmIds().stream())
                     .distinct()
                     .collect(Collectors.toCollection(HashSet::new));
+            log.debug("got FilmSet");
+            System.out.println(httpClient);
+            System.out.println(filmIdsSet);
+            System.out.println(peopleList);
             var filmList = httpClient.getFilmList(filmIdsSet).get(10, SECONDS);
+            log.debug("got FilmList");
             var planetList = planetsListFuture.get(10, SECONDS);
-
+            log.debug("got PlanetList");
             var result = new ResultValidator(input, peopleList, planetList, filmList)
                     .validate()
                     .buildResult();
-
-            sendToDataBase(result);
+            log.debug("result built");
+            //sendToDataBase(result);
+            return result;
         } catch (InterruptedException | ExecutionException | TimeoutException ex) {
             log.error("Service Connection Error", ex);
             Thread.currentThread().interrupt();
             throw new RestExceptions.HttpClientNoConnectionException("Problem With Connection to Swapi", ex);
 
         }
-
+        
     }
 
     private boolean verifyLists(List<People> peopleList, List<Planet> planetList, List<Film> filmList) {
