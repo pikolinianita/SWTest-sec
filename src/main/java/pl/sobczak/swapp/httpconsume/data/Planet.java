@@ -8,11 +8,13 @@ package pl.sobczak.swapp.httpconsume.data;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 /**
  *
  * @author piko
  */
+@Accessors(chain = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

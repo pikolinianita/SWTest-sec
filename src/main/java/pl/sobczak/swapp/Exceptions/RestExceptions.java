@@ -10,23 +10,25 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  *
- * @author piko
- * Class With all Exceptions used by project - to have all exceptions in one file
- * (no sophisticated logic here)
+ * @author piko Class With all Exceptions used by project - to have all
+ * exceptions in one file (no sophisticated logic here)
  */
-public class RestExceptions {
+public class RestExceptions extends Exception {
 
-        
+    private RestExceptions(){
+        //Use static classes only
+    }
+    
     @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
     public static class HttpClientNoConnectionException extends RuntimeException {
 
         public HttpClientNoConnectionException(String text) {
             super(text);
-            
+
         }
-        
-         public HttpClientNoConnectionException(String text, Throwable cause) {
-            super(text, cause);            
+
+        public HttpClientNoConnectionException(String text, Throwable cause) {
+            super(text, cause);
         }
     }
 
@@ -67,6 +69,14 @@ public class RestExceptions {
 
         public AkeitaException(String message) {
             super(message);
+        }
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public static class BadSwapiRequest extends RuntimeException {
+
+        public BadSwapiRequest(String text) {
+            super(text);
         }
     }
 
