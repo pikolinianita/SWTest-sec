@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.sobczak.swapp.httpconsume;
+package pl.sobczak.swapp.helper;
 
 import java.io.IOException;
 import lombok.extern.apachecommons.CommonsLog;

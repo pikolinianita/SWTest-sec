@@ -10,12 +10,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 
 /**
  * simple class for transfer query from REST service to HttpConsumer module
  *
  * @author piko
  */
+@Accessors(chain = true)
 @Getter()
 @Setter()
 @NoArgsConstructor

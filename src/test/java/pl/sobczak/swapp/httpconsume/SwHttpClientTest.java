@@ -6,6 +6,7 @@
 package pl.sobczak.swapp.httpconsume;
 
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -52,7 +53,7 @@ class SwHttpClientTest {
         List<String> episodes = List.of("1", "2", "3", "4", "5");
 
         // when
-        var futures = episodes.stream()
+        var titles = episodes.stream()
                 .map(client::getFilm)
                 .map(future -> {
                     try {
@@ -65,7 +66,7 @@ class SwHttpClientTest {
                 .collect(Collectors.toList());
 
         // then
-        assertThat(futures).as("five films")
+        assertThat(titles).as("five films")
                 .hasSize(5)
                 .containsExactlyInAnyOrder(
                         "A New Hope",
@@ -75,6 +76,26 @@ class SwHttpClientTest {
                         "Attack of the Clones");
     }
 
+    @Test
+    void filmListTest() throws InterruptedException, ExecutionException {
+        
+        // given
+        Set<String> episodes = Set.of("1", "2", "3", "4", "5");
+        // when
+        var resultList = client.getFilmList(episodes).get();
+        // then
+        assertThat(resultList).as("Five Films")
+                .hasSize(5)
+                .extracting(Film::getName)
+                .containsExactlyInAnyOrder( 
+                    "A New Hope",
+                    "The Empire Strikes Back",
+                    "Return of the Jedi",
+                    "The Phantom Menace",
+                    "Attack of the Clones");
+    }
+    
+    
     @Test
     void getPlanetListTest() throws InterruptedException, ExecutionException {
 

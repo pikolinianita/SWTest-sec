@@ -42,7 +42,8 @@ public class PeopleContainer {
                         .map(record
                                 -> new People((String) record.get("name"),
                                 getId((String) record.get("url")),
-                                makeSet(record.get("films")))
+                                makeSet(record.get("films")),
+                                        getId((String)record.get("homeworld")))
                         )
                         .collect(Collectors.toCollection(LinkedList::new)));
     }

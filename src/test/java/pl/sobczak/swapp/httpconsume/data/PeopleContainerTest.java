@@ -61,6 +61,9 @@ class PeopleContainerTest {
                 .hasSize(4)
                 .containsExactlyInAnyOrder("1","2","3","6");
                 
+        softly.assertThat(shouldBeVader.getPlanetId()).as("homeworld")
+                .isEqualTo("1");
+        
         softly.assertAll();
     }
     

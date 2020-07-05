@@ -8,11 +8,13 @@ package pl.sobczak.swapp.httpconsume.data;
 import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  *
  * @author piko
  */
+@Accessors(chain = true)
 @Data
 @AllArgsConstructor
 public class People {
@@ -22,4 +24,6 @@ public class People {
     private String swapiId;
 
     private Set<String> filmIds;
+    
+    private String planetId;
 }
